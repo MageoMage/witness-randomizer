@@ -280,12 +280,23 @@ bool ArrowWatchdog::checkNewSymbols4(int x, int y, int symbol) {
 		Point pos = pick_random_fw(open);
 		bool flag = false;
 		for (Point p : get_region_for_watchdog(pos)) {
-			if(flag && (get(p) & Decoration::NewSymbols4) == Decoration::NewSymbols4)
+			if(flag && get(p) & 0xffffff0 == Decoration::NewSymbols4)
 			{
+				OutputDebugStringW(L"(");
+				DebugLog(p.first);
+				OutputDebugStringW(L",");
+				DebugLog(p.second);
+				OutputDebugStringW(L")");
 				OutputDebugStringW(L"too_many_ghost");
 				return false;
 			}
-			else if ((get(p) & Decoration::NewSymbols4) == Decoration::NewSymbols4) {
+			else if (get(p) & 0xffffff0 == Decoration::NewSymbols4) {
+
+				OutputDebugStringW(L"(");
+				DebugLog(p.first);
+				OutputDebugStringW(L",");
+				DebugLog(p.second);
+				OutputDebugStringW(L")");
 				flag = true;
 			}
 			open.erase(p);
@@ -294,6 +305,7 @@ bool ArrowWatchdog::checkNewSymbols4(int x, int y, int symbol) {
 			OutputDebugStringW(L"no_ghost");
 			return false;
 		}
+		OutputDebugStringW(L"passed");
 	}
 	return true;
 }

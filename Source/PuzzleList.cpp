@@ -297,7 +297,7 @@ void PuzzleList::GenerateQuarryN()
 	generator->set(3, 5, Decoration::NewSymbols5_7);
 	generator->set(5, 3, Decoration::NewSymbols5_8);
 	generator->write(0x01E59);
-	/*
+	
 	//Dots
 	generator->setGridSize(5, 5);
 	generator->pathWidth = 0.6f;
@@ -334,7 +334,7 @@ void PuzzleList::GenerateQuarryN()
 	generator->setSymbol(Decoration::Exit, 16, 16);
 	generator->generate(0x3C125, Decoration::NewSymbols5, 36);
 	//Boathouse Ramp Activation
-	*/
+	
 	generator->setGridSize(4, 4);
 	generator->generate(0x034D4, Decoration::NewSymbols8, 1);
 	generator->generate(0x021D5, Decoration::NewSymbols8, 2);
@@ -1454,14 +1454,14 @@ void PuzzleList::GenerateQuarryH()
 	//Boathouse Ramp Activation
 	generator->resetConfig();
 	generator->pathWidth = 0.4f;
-	generator->setGridSize(7, 7);
+	generator->setGridSize(6, 6);
 	generator->setFlag(Generate::Config::EnableFlash);
 	generator->generate(0x034D4,
-		Decoration::Star | Decoration::White, 3,
-		Decoration::Star | Decoration::Black, 3,
+		Decoration::Star | Decoration::White, 2,
+		Decoration::Star | Decoration::Black, 2,
 		Decoration::Stone | Decoration::Black, 5,
-		Decoration::Triangle | Decoration::Black, 6,
-		Decoration::Star | Decoration::Magenta, 7,
+		Decoration::Triangle | Decoration::Black, 3,
+		Decoration::Star | Decoration::Magenta, 5,
 		Decoration::Stone | Decoration::Magenta, 3,
 		Decoration::Eraser | Decoration::Color::White, 1);
 	generator->setFlagOnce(Generate::Config::DisconnectShapes);
