@@ -51,17 +51,17 @@ public:
 		Mushroom = 0x3000000,
 		Ghost = 0x4000000,
 		Pipe = 0x5000000,
-		NewSymbols5_1 = 0x5010000,
-		NewSymbols5_2 = 0x5020000,
-		NewSymbols5_3 = 0x5030000,
-		NewSymbols5_4 = 0x5040000,
-		NewSymbols5_5 = 0x5050000,
-		NewSymbols5_6 = 0x5060000,
-		NewSymbols5_7 = 0x5070000,
-		NewSymbols5_8 = 0x5080000,
-		NewSymbols5_9 = 0x5090000,
-		NewSymbols5_A = 0x50A0000,
-		NewSymbols5_B = 0x50B0000,
+		Pipe_1 = 0x5010000,
+		Pipe_2 = 0x5020000,
+		Pipe_3 = 0x5030000,
+		Pipe_4 = 0x5040000,
+		Pipe_5 = 0x5050000,
+		Pipe_6 = 0x5060000,
+		Pipe_7 = 0x5070000,
+		Pipe_8 = 0x5080000,
+		Pipe_9 = 0x5090000,
+		Pipe_A = 0x50A0000,
+		Pipe_B = 0x50B0000,
 		AntiTriangle = 0x6000000,
 		Dart = 0x7000000,
 		Raindrop = 0x8000000,
@@ -449,7 +449,7 @@ private:
 		}
 	}
 
-	void render_newsymbols(int x, int y,int num, std::vector<float>& intersections, std::vector<int>& intersectionFlags, std::vector<int>& polygons) {
+	void render_mines(int x, int y,int num, std::vector<float>& intersections, std::vector<int>& intersectionFlags, std::vector<int>& polygons) {
 		std::vector<float> positions = {};
 		std::vector<int> polys = {};
 		std::vector<float> positions_upper = { 0.35f, 0.8f, 0.4f, 0.85f, 0.6f, 0.85f, 0.65f, 0.8f, 0.6f, 0.75f, 0.4f, 0.75f };
@@ -520,7 +520,7 @@ private:
 		};
 	};
 
-	void render_newsymbols2(int x, int y, int num, std::vector<float>& intersections, std::vector<int>& intersectionFlags, std::vector<int>& polygons) {
+	void render_head(int x, int y, int num, std::vector<float>& intersections, std::vector<int>& intersectionFlags, std::vector<int>& polygons) {
 		if (num == 9) return;
 		std::vector<float> positions = {
 		0.5f,0.7f,
@@ -601,7 +601,7 @@ private:
 		};
 	};
 
-	void render_newsymbols3(int x, int y, int num, std::vector<float>& intersections, std::vector<int>& intersectionFlags, std::vector<int>& polygons) {
+	void render_mushroom(int x, int y, int num, std::vector<float>& intersections, std::vector<int>& intersectionFlags, std::vector<int>& polygons) {
 		std::vector<float> positions = {
 			0.5f,0.6f,
 			0.5f, 0.8f,
@@ -660,7 +660,7 @@ private:
 		};
 	};
 	
-	void render_newsymbols4(int x, int y, int num, std::vector<float>& intersections, std::vector<int>& intersectionFlags, std::vector<int>& polygons) {
+	void render_ghost(int x, int y, int num, std::vector<float>& intersections, std::vector<int>& intersectionFlags, std::vector<int>& polygons) {
 		std::vector<float> positions = {
 		0.5f, 0.9f,
 		0.4f, 0.65f,
@@ -748,7 +748,7 @@ private:
 		};
 	};
 
-	void render_newsymbols5(int x, int y, int num, std::vector<float>& intersections, std::vector<int>& intersectionFlags, std::vector<int>& polygons) {
+	void render_pipe(int x, int y, int num, std::vector<float>& intersections, std::vector<int>& intersectionFlags, std::vector<int>& polygons) {
 		std::vector<float> positions = { 0.4f, 0.4f, 0.4f, 0.6f, 0.6f, 0.6f, 0.6f, 0.4f };
 		std::vector<int> polys = { 0, 1, 2, 0, 0, 2, 3, 0, };
 		int point_count = 5;
@@ -819,7 +819,7 @@ private:
 		};
 	};
 	
-	void render_newsymbols6(int x, int y, int num, std::vector<float>& intersections, std::vector<int>& intersectionFlags, std::vector<int>& polygons) {
+	void render_antitriangle(int x, int y, int num, std::vector<float>& intersections, std::vector<int>& intersectionFlags, std::vector<int>& polygons) {
 		std::vector<float> positions = {};
 		std::vector<int> polys = {};
 		int point_count = 3;
@@ -920,7 +920,7 @@ private:
 		};
 	};
 
-	void render_newsymbols7(int x, int y, int count, int dir, std::vector<float>& intersections, std::vector<int>& intersectionFlags, std::vector<int>& polygons) {
+	void render_dart(int x, int y, int count, int dir, std::vector<float>& intersections, std::vector<int>& intersectionFlags, std::vector<int>& polygons) {
 		std::vector<float> positions = {};
 		std::vector<int> polys = {};
 		int point_count = 4;  //number of point
@@ -1041,7 +1041,7 @@ private:
 		};
 	};
 
-	void render_newsymbols8(int x, int y, int dir, std::vector<float>& intersections, std::vector<int>& intersectionFlags, std::vector<int>& polygons) {
+	void render_raindrop(int x, int y, int dir, std::vector<float>& intersections, std::vector<int>& intersectionFlags, std::vector<int>& polygons) {
 		std::vector<float> positions = {
 			0.5f,0.7f,
 			0.5f, 0.9f,
@@ -1108,7 +1108,7 @@ private:
 		};
 	};
 
-	void render_newsymbols9(int x, int y, int type, std::vector<float>& intersections, std::vector<int>& intersectionFlags, std::vector<int>& polygons) {
+	void render_pointer(int x, int y, int type, std::vector<float>& intersections, std::vector<int>& intersectionFlags, std::vector<int>& polygons) {
 		std::vector<float> positions = {};
 		std::vector<int> polys = {};
 		std::vector<float> up = { 

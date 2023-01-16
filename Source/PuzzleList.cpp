@@ -265,15 +265,15 @@ void PuzzleList::GenerateQuarryN()
 	//Entry Gates
 	generator->initPanel(0x09E57);
 	generator->clear();
-	generator->set(1, 1, Decoration::NewSymbols5_2);
-	generator->set(7, 7, Decoration::NewSymbols5_4);
+	generator->set(1, 1, Decoration::Pipe_2);
+	generator->set(7, 7, Decoration::Pipe_4);
 	generator->write(0x09E57);
 	generator->initPanel(0x17C09);
 	generator->clear();
-	generator->set(1, 1, Decoration::NewSymbols5_9);
-	generator->set(7, 7, Decoration::NewSymbols5_9);
-	generator->set(1, 7, Decoration::NewSymbols5_9);
-	generator->set(7, 1, Decoration::NewSymbols5_9);
+	generator->set(1, 1, Decoration::Pipe_9);
+	generator->set(7, 7, Decoration::Pipe_9);
+	generator->set(1, 7, Decoration::Pipe_9);
+	generator->set(7, 1, Decoration::Pipe_9);
 	generator->write(0x17C09);
 	//Mill Entry Door
 	generator->resetConfig();
@@ -282,20 +282,20 @@ void PuzzleList::GenerateQuarryN()
 	generator->setSymbol(Decoration::Exit, 8, 0);
 	generator->initPanel(0x01E5A);
 	generator->clear();
-	generator->set(1, 7, Decoration::NewSymbols5_A);
-	generator->set(7, 1, Decoration::NewSymbols5_B);
-	generator->set(7, 7, Decoration::NewSymbols5_A);
-	generator->set(1, 1, Decoration::NewSymbols5_B);
+	generator->set(1, 7, Decoration::Pipe_A);
+	generator->set(7, 1, Decoration::Pipe_B);
+	generator->set(7, 7, Decoration::Pipe_A);
+	generator->set(1, 1, Decoration::Pipe_B);
 	generator->write(0x01E5A);
 	generator->setGridSize(4, 4);
 	generator->setSymbol(Decoration::Start, 0, 8);
 	generator->setSymbol(Decoration::Exit, 8, 0);
 	generator->initPanel(0x01E59);
 	generator->clear();
-	generator->set(3, 3, Decoration::NewSymbols5_5);
-	generator->set(5, 5, Decoration::NewSymbols5_6);
-	generator->set(3, 5, Decoration::NewSymbols5_7);
-	generator->set(5, 3, Decoration::NewSymbols5_8);
+	generator->set(3, 3, Decoration::Pipe_5);
+	generator->set(5, 5, Decoration::Pipe_6);
+	generator->set(3, 5, Decoration::Pipe_7);
+	generator->set(5, 3, Decoration::Pipe_8);
 	generator->write(0x01E59);
 	
 	//Dots

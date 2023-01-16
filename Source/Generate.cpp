@@ -611,25 +611,25 @@ bool Generate::place_all_symbols(PuzzleSymbols & symbols)
 	for (std::pair<int, int> s : symbols[Decoration::Arrow]) if (!place_arrows(s.first & 0xf, s.second, s.first >> 12))
 		return false;
 	//Added_Start
-	for (std::pair<int, int> s : symbols[Decoration::Mines]) if (!place_newsymbols(s.first & 0xf, s.second))
+	for (std::pair<int, int> s : symbols[Decoration::Mines]) if (!place_mines(s.first & 0xf, s.second))
 		return false;
-	for (std::pair<int, int> s : symbols[Decoration::Head]) if (!place_newsymbols2(s.first & 0xf, s.second))
+	for (std::pair<int, int> s : symbols[Decoration::Head]) if (!place_head(s.first & 0xf, s.second))
 		return false;
-	for (std::pair<int, int> s : symbols[Decoration::Mushroom]) if (!place_newsymbols3(s.first & 0xf, s.second))
+	for (std::pair<int, int> s : symbols[Decoration::Mushroom]) if (!place_mushroom(s.first & 0xf, s.second))
 		return false;
-	for (std::pair<int, int> s : symbols[Decoration::Ghost]) if (!place_newsymbols4(s.first & 0xf, s.second))
+	for (std::pair<int, int> s : symbols[Decoration::Ghost]) if (!place_ghost(s.first & 0xf, s.second))
 		return false;
 	for (int t : {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}) {
-		for (std::pair<int, int> s : symbols[Decoration::Pipe | (t << 16)]) if (!place_newsymbols5(s.first & 0xf, s.second, t))
+		for (std::pair<int, int> s : symbols[Decoration::Pipe | (t << 16)]) if (!place_pipe(s.first & 0xf, s.second, t))
 			return false;
 	}
-	for (std::pair<int, int> s : symbols[Decoration::AntiTriangle]) if (!place_newsymbols6(s.first & 0xf, s.second))
+	for (std::pair<int, int> s : symbols[Decoration::AntiTriangle]) if (!place_antitriangle(s.first & 0xf, s.second))
 		return false;
-	for (std::pair<int, int> s : symbols[Decoration::Dart]) if (!place_newsymbols7(s.first & 0xf, s.second))
+	for (std::pair<int, int> s : symbols[Decoration::Dart]) if (!place_dart(s.first & 0xf, s.second))
 		return false;
-	for (std::pair<int, int> s : symbols[Decoration::Raindrop]) if (!place_newsymbols8(s.first & 0xf, s.second))
+	for (std::pair<int, int> s : symbols[Decoration::Raindrop]) if (!place_raindrop(s.first & 0xf, s.second))
 		return false;
-	for (std::pair<int, int> s : symbols[Decoration::Pointer]) if (!place_newsymbols9(s.first & 0xf, s.second))
+	for (std::pair<int, int> s : symbols[Decoration::Pointer]) if (!place_pointer(s.first & 0xf, s.second))
 		return false;
 	for (std::pair<int, int> s : symbols[Decoration::NewSymbolsA]) if (!place_newsymbolsA(s.first & 0xf, s.second))
 		return false;
@@ -1737,7 +1737,7 @@ bool Generate::place_arrows(int color, int amount, int targetCount)
 	return true;
 }
 
-bool Generate::place_newsymbols(int color, int amount)
+bool Generate::place_mines(int color, int amount)
 {
 	std::set<Point> open = _openpos;
 	while (amount > 0) {
@@ -1976,7 +1976,7 @@ bool Generate::combine_shapes(std::vector<Shape>& shapes)
 	return false;
 }
 
-bool Generate::place_newsymbols2(int color, int amount)
+bool Generate::place_head(int color, int amount)
 {
 	std::set<Point> open = _openpos;
 	int fails = 0;
@@ -2017,7 +2017,7 @@ bool Generate::place_newsymbols2(int color, int amount)
 	return true;
 }
 
-bool Generate::place_newsymbols3(int color, int amount)
+bool Generate::place_mushroom(int color, int amount)
 {
 	std::set<Point> open = _openpos;
 	while (amount > 0) {
@@ -2045,7 +2045,7 @@ bool Generate::place_newsymbols3(int color, int amount)
 	return true;
 }
 
-bool Generate::place_newsymbols4(int color, int amount)
+bool Generate::place_ghost(int color, int amount)
 {
 	std::set<Point> open;
 	for (int x = 1; x < _width; x += 2) {
@@ -2088,7 +2088,7 @@ bool Generate::place_newsymbols4(int color, int amount)
 	return open.size() == 0;
 }
 
-bool Generate::place_newsymbols5(int color, int amount,int shape)
+bool Generate::place_pipe(int color, int amount,int shape)
 {
 	std::set<Point> open = _openpos;
 	int fails = 0;
@@ -2230,7 +2230,7 @@ std::vector<int> Generate::get_region_grid_patterns(std::set<Point> points) {
 }
 
 //Anti-triangle 
-bool Generate::place_newsymbols6(int color, int amount)
+bool Generate::place_antitriangle(int color, int amount)
 {
 	std::set<Point> open = _openpos;
 	while (amount > 0) {
@@ -2291,7 +2291,7 @@ bool Generate::check_it_is_corner(Point pos) {
 	return false;
 }
 
-bool Generate::place_newsymbols7(int color, int amount)
+bool Generate::place_dart(int color, int amount)
 {
 	std::set<Point> open = _openpos;
 	while (amount > 0) {
@@ -2325,7 +2325,7 @@ bool Generate::place_newsymbols7(int color, int amount)
 	return true;
 }
 
-bool Generate::place_newsymbols8(int color, int amount)
+bool Generate::place_raindrop(int color, int amount)
 {
 	std::set<Point> open = _openpos;
 	int fails = 0;
@@ -2377,7 +2377,7 @@ bool Generate::isSurrounded(Point pos, Point dir,int type) {
 	return true;
 }
 
-bool Generate::place_newsymbols9(int color, int amount)
+bool Generate::place_pointer(int color, int amount)
 {
 	std::set<Point> open = _openpos;
 	while (amount > 0) {

@@ -650,7 +650,7 @@ void Panel::WriteIntersections() {
 	for (int y = 1; y < _height; y += 2) {
 		for (int x = 1; x < _width; x += 2) {
 			if ((_grid[x][y] & 0xF000700) == Decoration::Mines)
-				render_newsymbols(x, y, (_grid[x][y] & 0xf0000) >> 16 , intersections, intersectionFlags, polygons);
+				render_mines(x, y, (_grid[x][y] & 0xf0000) >> 16 , intersections, intersectionFlags, polygons);
 		}
 	}
 
@@ -658,7 +658,7 @@ void Panel::WriteIntersections() {
 	for (int y = 1; y < _height; y += 2) {
 		for (int x = 1; x < _width; x += 2) {
 			if ((_grid[x][y] & 0xF000700) == Decoration::Head)
-				render_newsymbols2(x, y, (_grid[x][y] & 0xf0000) >> 16, intersections, intersectionFlags, polygons);
+				render_head(x, y, (_grid[x][y] & 0xf0000) >> 16, intersections, intersectionFlags, polygons);
 		}
 	}
 
@@ -666,7 +666,7 @@ void Panel::WriteIntersections() {
 	for (int y = 1; y < _height; y += 2) {
 		for (int x = 1; x < _width; x += 2) {
 			if ((_grid[x][y] & 0xF000700) == Decoration::Mushroom)
-				render_newsymbols3(x, y, (_grid[x][y] & 0xf0000) >> 16, intersections, intersectionFlags, polygons);
+				render_mushroom(x, y, (_grid[x][y] & 0xf0000) >> 16, intersections, intersectionFlags, polygons);
 		}
 	}
 
@@ -674,7 +674,7 @@ void Panel::WriteIntersections() {
 	for (int y = 1; y < _height; y += 2) {
 		for (int x = 1; x < _width; x += 2) {
 			if ((_grid[x][y] & 0xF000700) == Decoration::Ghost)
-				render_newsymbols4(x, y, (_grid[x][y] & 0xff0000) >> 16, intersections, intersectionFlags, polygons);
+				render_ghost(x, y, (_grid[x][y] & 0xff0000) >> 16, intersections, intersectionFlags, polygons);
 		}
 	}
 
@@ -682,7 +682,7 @@ void Panel::WriteIntersections() {
 	for (int y = 1; y < _height; y += 2) {
 		for (int x = 1; x < _width; x += 2) {
 			if ((_grid[x][y] & 0xF000700) == Decoration::Pipe)
-				render_newsymbols5(x, y, (_grid[x][y] & 0xf0000) >> 16, intersections, intersectionFlags, polygons);
+				render_pipe(x, y, (_grid[x][y] & 0xf0000) >> 16, intersections, intersectionFlags, polygons);
 		}
 	}
 
@@ -690,7 +690,7 @@ void Panel::WriteIntersections() {
 	for (int y = 1; y < _height; y += 2) {
 		for (int x = 1; x < _width; x += 2) {
 			if ((_grid[x][y] & 0xF000700) == Decoration::AntiTriangle)
-				render_newsymbols6(x, y, (_grid[x][y] & 0xf0000) >> 16, intersections, intersectionFlags, polygons);
+				render_antitriangle(x, y, (_grid[x][y] & 0xf0000) >> 16, intersections, intersectionFlags, polygons);
 		}
 	}
 
@@ -698,7 +698,7 @@ void Panel::WriteIntersections() {
 	for (int y = 1; y < _height; y += 2) {
 		for (int x = 1; x < _width; x += 2) {
 			if ((_grid[x][y] & 0xF000700) == Decoration::Dart)
-				render_newsymbols7(x, y, (_grid[x][y] & 0xf0000) >> 16, (_grid[x][y] & 0x0f000) >> 12, intersections, intersectionFlags, polygons);
+				render_dart(x, y, (_grid[x][y] & 0xf0000) >> 16, (_grid[x][y] & 0x0f000) >> 12, intersections, intersectionFlags, polygons);
 		}
 	}
 
@@ -706,7 +706,7 @@ void Panel::WriteIntersections() {
 	for (int y = 1; y < _height; y += 2) {
 		for (int x = 1; x < _width; x += 2) {
 			if ((_grid[x][y] & 0xF000700) == Decoration::Raindrop)
-				render_newsymbols8(x, y, (_grid[x][y] & 0xf0000) >> 16, intersections, intersectionFlags, polygons);
+				render_raindrop(x, y, (_grid[x][y] & 0xf0000) >> 16, intersections, intersectionFlags, polygons);
 		}
 	}
 
@@ -714,7 +714,7 @@ void Panel::WriteIntersections() {
 	for (int y = 1; y < _height; y += 2) {
 		for (int x = 1; x < _width; x += 2) {
 			if ((_grid[x][y] & 0xF000700) == Decoration::Pointer)
-				render_newsymbols9(x, y, (_grid[x][y] & 0xf0000) >> 16, intersections, intersectionFlags, polygons);
+				render_pointer(x, y, (_grid[x][y] & 0xf0000) >> 16, intersections, intersectionFlags, polygons);
 		}
 	}
 
