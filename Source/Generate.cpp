@@ -611,25 +611,25 @@ bool Generate::place_all_symbols(PuzzleSymbols & symbols)
 	for (std::pair<int, int> s : symbols[Decoration::Arrow]) if (!place_arrows(s.first & 0xf, s.second, s.first >> 12))
 		return false;
 	//Added_Start
-	for (std::pair<int, int> s : symbols[Decoration::NewSymbols]) if (!place_newsymbols(s.first & 0xf, s.second))
+	for (std::pair<int, int> s : symbols[Decoration::Mines]) if (!place_newsymbols(s.first & 0xf, s.second))
 		return false;
-	for (std::pair<int, int> s : symbols[Decoration::NewSymbols2]) if (!place_newsymbols2(s.first & 0xf, s.second))
+	for (std::pair<int, int> s : symbols[Decoration::Head]) if (!place_newsymbols2(s.first & 0xf, s.second))
 		return false;
-	for (std::pair<int, int> s : symbols[Decoration::NewSymbols3]) if (!place_newsymbols3(s.first & 0xf, s.second))
+	for (std::pair<int, int> s : symbols[Decoration::Mushroom]) if (!place_newsymbols3(s.first & 0xf, s.second))
 		return false;
-	for (std::pair<int, int> s : symbols[Decoration::NewSymbols4]) if (!place_newsymbols4(s.first & 0xf, s.second))
+	for (std::pair<int, int> s : symbols[Decoration::Ghost]) if (!place_newsymbols4(s.first & 0xf, s.second))
 		return false;
 	for (int t : {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}) {
-		for (std::pair<int, int> s : symbols[Decoration::NewSymbols5 | (t << 16)]) if (!place_newsymbols5(s.first & 0xf, s.second, t))
+		for (std::pair<int, int> s : symbols[Decoration::Pipe | (t << 16)]) if (!place_newsymbols5(s.first & 0xf, s.second, t))
 			return false;
 	}
-	for (std::pair<int, int> s : symbols[Decoration::NewSymbols6]) if (!place_newsymbols6(s.first & 0xf, s.second))
+	for (std::pair<int, int> s : symbols[Decoration::AntiTriangle]) if (!place_newsymbols6(s.first & 0xf, s.second))
 		return false;
-	for (std::pair<int, int> s : symbols[Decoration::NewSymbols7]) if (!place_newsymbols7(s.first & 0xf, s.second))
+	for (std::pair<int, int> s : symbols[Decoration::Dart]) if (!place_newsymbols7(s.first & 0xf, s.second))
 		return false;
-	for (std::pair<int, int> s : symbols[Decoration::NewSymbols8]) if (!place_newsymbols8(s.first & 0xf, s.second))
+	for (std::pair<int, int> s : symbols[Decoration::Raindrop]) if (!place_newsymbols8(s.first & 0xf, s.second))
 		return false;
-	for (std::pair<int, int> s : symbols[Decoration::NewSymbols9]) if (!place_newsymbols9(s.first & 0xf, s.second))
+	for (std::pair<int, int> s : symbols[Decoration::Pointer]) if (!place_newsymbols9(s.first & 0xf, s.second))
 		return false;
 	for (std::pair<int, int> s : symbols[Decoration::NewSymbolsA]) if (!place_newsymbolsA(s.first & 0xf, s.second))
 		return false;
@@ -1775,7 +1775,7 @@ bool Generate::place_newsymbols(int color, int amount)
 		{
 			num = 8 - num;
 		}
-		set(pos, Decoration::NewSymbols | color | num << 16);//0x10(num)000(color)
+		set(pos, Decoration::Mines | color | num << 16);//0x10(num)000(color)
 		_openpos.erase(pos);
 		amount--;
 	}
@@ -2001,10 +2001,10 @@ bool Generate::place_newsymbols2(int color, int amount)
 		int max = 2;
 		if (_width <= _height && _width >= 2) max = _width; else if(_height >= 2) max = _height;
 		if (!flag && 1 <= count && count < max) {
-			set(pos, Decoration::NewSymbols2 | color | choice << 16);
+			set(pos, Decoration::Head | color | choice << 16);
 			for (Point p : get_region(pos)) {
 				if ((dir.first == 0 || (p.first - pos.first) * dir.first > 0) && (dir.second == 0 || (p.second - pos.second) * dir.second > 0) && (p.first != pos.first || p.second != pos.second)) {
-					if ((get(p) == 0xA00 || get(p) == 0x0 || get(p) == 0x600)) set(p, Decoration::NewSymbols2 | 9 << 16);
+					if ((get(p) == 0xA00 || get(p) == 0x0 || get(p) == 0x600)) set(p, Decoration::Head | 9 << 16);
 					open.erase(p);
 					_openpos.erase(p);
 				}
@@ -2036,7 +2036,7 @@ bool Generate::place_newsymbols3(int color, int amount)
 				if (count_crossings(pos, dir) == 0) flag = true;
 			}
 			if (flag) continue;
-			set(pos, Decoration::NewSymbols3 | color);
+			set(pos, Decoration::Mushroom | color);
 			_openpos.erase(pos);
 			amount--;
 			break;
@@ -2062,7 +2062,7 @@ bool Generate::place_newsymbols4(int color, int amount)
 		if (pos.first == _panel->_width / 2 || Point::pillarWidth > 0 && pos.first == _panel->_width / 2 - 1)
 			continue; //Because of a glitch additional symbols in the center column won't draw right
 		if (_openpos.count(pos) >= 1) {
-			set(pos, Decoration::NewSymbols4 | color | amount << 16);
+			set(pos, Decoration::Ghost | color | amount << 16);
 		}
 		else{
 			bool flag = false;
@@ -2102,12 +2102,12 @@ bool Generate::place_newsymbols5(int color, int amount,int shape)
 			continue; //Because of a glitch additional symbols in the center column won't draw right
 		int pattern = Random::rand() % 11 + 1;
 		if (shape != 0) pattern = shape;
-		//0:X(null) 1:„¯(OOCC) 2:„¬(COOC) 3:„­(CCOO) 4:„®(OCCO) 5:„±(COOO) 6:„²(OCOO) 7:„³(OOCO) 8:„°(OOOC) 9:„´(OOOO) A:„«(OCOC) B:„ª(COCO) C:Gap_Column D:Gap_Row
+		//0:X(null) 1:ï¿½ï¿½(OOCC) 2:ï¿½ï¿½(COOC) 3:ï¿½ï¿½(CCOO) 4:ï¿½ï¿½(OCCO) 5:ï¿½ï¿½(COOO) 6:ï¿½ï¿½(OCOO) 7:ï¿½ï¿½(OOCO) 8:ï¿½ï¿½(OOOC) 9:ï¿½ï¿½(OOOO) A:ï¿½ï¿½(OCOC) B:ï¿½ï¿½(COCO) C:Gap_Column D:Gap_Row
 		std::set<Point> empty_region;
 		empty_region.insert(pos);
 		std::vector<int> region_data = get_region_grid_patterns(get_region_points(pos));
 		for (Point p : get_region(pos)) {
-			if ((get(p) & 0xF000700) == Decoration::NewSymbols5) {
+			if ((get(p) & 0xF000700) == Decoration::Pipe) {
 				region_data[(get(p) & 0xF0000) >> 16] -= 1;
 			}
 			else if ((get(p) == 0xA00 || get(p) == 0 || get(p) == 0x600) && !(p.first == _panel->_width / 2 || Point::pillarWidth > 0 && p.first == _panel->_width / 2 - 1)) {
@@ -2117,28 +2117,28 @@ bool Generate::place_newsymbols5(int color, int amount,int shape)
 
 		if (region_data[pattern] <= empty_region.size() && empty_region.size() <= amount) {
 			/*
-			OutputDebugStringW(L"ƒpƒ^[ƒ“”Ô†:");
+			OutputDebugStringW(L"ï¿½pï¿½^ï¿½[ï¿½ï¿½ï¿½Ôï¿½:");
 			DebugLog(pattern);
 
-			OutputDebugStringW(L",—Ìˆæ‚É‚ ‚éƒpƒ^[ƒ“‚Ì”:");
+			OutputDebugStringW(L",ï¿½Ìˆï¿½É‚ï¿½ï¿½ï¿½pï¿½^ï¿½[ï¿½ï¿½ï¿½Ìï¿½:");
 			DebugLog(region_data[pattern]);
 
-			OutputDebugStringW(L",—Ìˆæ‚É‚ ‚é‹ó”’‚Ì”:");
+			OutputDebugStringW(L",ï¿½Ìˆï¿½É‚ï¿½ï¿½ï¿½ó”’‚Ìï¿½:");
 			DebugLog(empty_region.size());
 
-			OutputDebugStringW(L",Žc‚è‚Ì‹L†”:");
+			OutputDebugStringW(L",ï¿½cï¿½ï¿½Ì‹Lï¿½ï¿½ï¿½ï¿½:");
 			*/
 			int count = region_data[pattern];
 			while (count > 0) {
 				Point position = pick_random(empty_region);
-				set(position, Decoration::NewSymbols5 | color | pattern << 16);//0x10(num)000(color)
+				set(position, Decoration::Pipe | color | pattern << 16);//0x10(num)000(color)
 				empty_region.erase(position);
 				_openpos.erase(position);
 				open.erase(position);
 				amount--;
 				count--;
 				/*
-				OutputDebugStringW(L"À•W:(");
+				OutputDebugStringW(L"ï¿½ï¿½ï¿½W:(");
 				DebugLog(position.first);
 				OutputDebugStringW(L",");
 				DebugLog(position.second);
@@ -2171,7 +2171,7 @@ std::set<Point> Generate::get_region_points(Point pos) {
 	return result;
 }
 
-//0:X(null) 1:„¯(OOCC) 2:„¬(COOC) 3:„­(CCOO) 4:„®(OCCO) 5:„±(COOO) 6:„²(OCOO) 7:„³(OOCO) 8:„°(OOOC) 9:„´(OOOO) A:„«(OCOC) B:„ª(COCO) C:Gap_Column D:Gap_Row
+//0:X(null) 1:ï¿½ï¿½(OOCC) 2:ï¿½ï¿½(COOC) 3:ï¿½ï¿½(CCOO) 4:ï¿½ï¿½(OCCO) 5:ï¿½ï¿½(COOO) 6:ï¿½ï¿½(OCOO) 7:ï¿½ï¿½(OOCO) 8:ï¿½ï¿½(OOOC) 9:ï¿½ï¿½(OOOO) A:ï¿½ï¿½(OCOC) B:ï¿½ï¿½(COCO) C:Gap_Column D:Gap_Row
 std::vector<int> Generate::get_region_grid_patterns(std::set<Point> points) {
 	std::vector<int> result(14, 0);
 	for (Point p : points) {
@@ -2248,7 +2248,7 @@ bool Generate::place_newsymbols6(int color, int amount)
 			}
 		}
 		if (num >= 1) {
-			set(pos, Decoration::NewSymbols6 | color | num << 16);//0x10(num)000(color)
+			set(pos, Decoration::AntiTriangle | color | num << 16);//0x10(num)000(color)
 			_openpos.erase(pos);
 			amount--;
 		}
@@ -2317,7 +2317,7 @@ bool Generate::place_newsymbols7(int color, int amount)
 			}
 		}
 		if (1 <= targetCount && targetCount <= 4) {
-			set(pos, Decoration::NewSymbols7 | targetCount << 16 | direct_num << 12 | color);//0x70(num)(dir)00(color)
+			set(pos, Decoration::Dart | targetCount << 16 | direct_num << 12 | color);//0x70(num)(dir)00(color)
 			_openpos.erase(pos);
 			amount--;
 		}
@@ -2341,7 +2341,7 @@ bool Generate::place_newsymbols8(int color, int amount)
 		bool flag = false;
 
 		if (isSurrounded(pos, dir, 2)) {
-			set(pos, Decoration::NewSymbols8 | color | choice << 16);
+			set(pos, Decoration::Raindrop | color | choice << 16);
 			_openpos.erase(pos);
 			amount--;
 		}
@@ -2417,7 +2417,7 @@ bool Generate::place_newsymbols9(int color, int amount)
 
 		int num = minbool[0] * 8 + minbool[1] * 4 + minbool[2] * 2 + minbool[3];
 		if (num == 0) continue;
-		set(pos, Decoration::NewSymbols9 | color | num << 16);//0x10(num)000(color)
+		set(pos, Decoration::Pointer | color | num << 16);//0x10(num)000(color)
 		_openpos.erase(pos);
 		amount--;
 	}

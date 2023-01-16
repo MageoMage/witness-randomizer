@@ -131,34 +131,34 @@ bool ArrowWatchdog::checkArrow(int x, int y)
 		if (grid[x][y + 1] == PATH) count++;
 		return count == (symbol >> 16);
 	}
-	if ((symbol & 0xF000700) == Decoration::NewSymbols) {
+	if ((symbol & 0xF000700) == Decoration::Mines) {
 		return checkNewSymbols(x, y,symbol);
 	}
-	else if ((symbol & 0xF000700) == Decoration::NewSymbols2) {
+	else if ((symbol & 0xF000700) == Decoration::Head) {
 		OutputDebugStringW(L"check_on_2");
 		return checkNewSymbols2(x, y, symbol);
 	}
-	else if ((symbol & 0xF000700) == Decoration::NewSymbols3) {
+	else if ((symbol & 0xF000700) == Decoration::Mushroom) {
 		OutputDebugStringW(L"check_on_3");
 		return checkNewSymbols3(x, y, symbol);
 	}
-	else if ((symbol & 0xF000700) == Decoration::NewSymbols4) {
+	else if ((symbol & 0xF000700) == Decoration::Ghost) {
 		OutputDebugStringW(L"check_on_4");
 		return checkNewSymbols4(x, y, symbol);
 	}
-	else if ((symbol & 0xF000700) == Decoration::NewSymbols5) {
+	else if ((symbol & 0xF000700) == Decoration::Pipe) {
 		return checkNewSymbols5(x, y, symbol);
 	}
-	else if ((symbol & 0xF000700) == Decoration::NewSymbols6) {
+	else if ((symbol & 0xF000700) == Decoration::AntiTriangle) {
 		return checkNewSymbols6(x, y, symbol);
 	}
-	else if ((symbol & 0xF000700) == Decoration::NewSymbols7) {
+	else if ((symbol & 0xF000700) == Decoration::Dart) {
 		return checkNewSymbols7(x, y, symbol);
 	}
-	else if ((symbol & 0xF000700) == Decoration::NewSymbols8) {
+	else if ((symbol & 0xF000700) == Decoration::Raindrop) {
 		return checkNewSymbols8(x, y, symbol);
 	}
-	else if ((symbol & 0xF000700) == Decoration::NewSymbols9) {
+	else if ((symbol & 0xF000700) == Decoration::Pointer) {
 		return checkNewSymbols9(x, y, symbol);
 	}
 	else if ((symbol & 0xF000700) == Decoration::NewSymbolsA) {
@@ -280,7 +280,7 @@ bool ArrowWatchdog::checkNewSymbols4(int x, int y, int symbol) {
 		Point pos = pick_random_fw(open);
 		bool flag = false;
 		for (Point p : get_region_for_watchdog(pos)) {
-			if(flag && get(p) & 0xffffff0 == Decoration::NewSymbols4)
+			if(flag && get(p) & 0xffffff0 == Decoration::Ghost)
 			{
 				OutputDebugStringW(L"(");
 				DebugLog(p.first);
@@ -290,7 +290,7 @@ bool ArrowWatchdog::checkNewSymbols4(int x, int y, int symbol) {
 				OutputDebugStringW(L"too_many_ghost");
 				return false;
 			}
-			else if (get(p) & 0xffffff0 == Decoration::NewSymbols4) {
+			else if (get(p) & 0xffffff0 == Decoration::Ghost) {
 
 				OutputDebugStringW(L"(");
 				DebugLog(p.first);
@@ -315,19 +315,19 @@ template <class T> T ArrowWatchdog::pick_random_fw(const std::set<T>& set) { aut
 bool ArrowWatchdog::checkNewSymbols5(int x, int y, int symbol) {
 	int num = (symbol & 0xF0000) >> 16;
 	Point pos = Point(x,y);
-	//0:X(null) 1:„¯(OOCC) 2:„¬(COOC) 3:„­(CCOO) 4:„®(OCCO) 5:„±(COOO) 6:„²(OCOO) 7:„³(OOCO) 8:„°(OOOC) 9:„´(OOOO) A:„«(OCOC) B:„ª(COCO) C:Gap_Column D:Gap_Row
+	//0:X(null) 1:ï¿½ï¿½(OOCC) 2:ï¿½ï¿½(COOC) 3:ï¿½ï¿½(CCOO) 4:ï¿½ï¿½(OCCO) 5:ï¿½ï¿½(COOO) 6:ï¿½ï¿½(OCOO) 7:ï¿½ï¿½(OOCO) 8:ï¿½ï¿½(OOOC) 9:ï¿½ï¿½(OOOO) A:ï¿½ï¿½(OCOC) B:ï¿½ï¿½(COCO) C:Gap_Column D:Gap_Row
 	std::vector<int> region_data = get_region_grid_patterns_fw(get_region_points_fw(pos));
 	/*
-	OutputDebugStringW(L"\n‚±‚Ì‹L†ƒpƒ^[ƒ“‚Æ‚»‚ÌÀ•W:");
+	OutputDebugStringW(L"\nï¿½ï¿½ï¿½Ì‹Lï¿½ï¿½ï¿½pï¿½^ï¿½[ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½Ìï¿½ï¿½W:");
 	DebugLog(num);
 	OutputDebugStringW(L"(");
 	DebugLog(x);
 	OutputDebugStringW(L",");
 	DebugLog(y);
 	OutputDebugStringW(L")");
-	OutputDebugStringW(L"\n‚±‚Ì—Ìˆæ‚É‚ ‚Á‚½“_‚Ì”:");
+	OutputDebugStringW(L"\nï¿½ï¿½ï¿½Ì—Ìˆï¿½É‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½Ìï¿½:");
 	DebugLog(get_region_points_fw(pos).size());
-	OutputDebugStringW(L"\n—Ìˆæƒpƒ^[ƒ“”(ƒVƒ“ƒ{ƒ‹‚Å‚Í‚È‚¢):(");
+	OutputDebugStringW(L"\nï¿½Ìˆï¿½pï¿½^ï¿½[ï¿½ï¿½ï¿½ï¿½(ï¿½Vï¿½ï¿½ï¿½{ï¿½ï¿½ï¿½Å‚Í‚È‚ï¿½):(");
 	for (int i = 0; i < 13; i++) {
 		DebugLog(region_data[i]);
 		OutputDebugStringW(L",");
@@ -353,7 +353,7 @@ std::set<Point> ArrowWatchdog::get_region_points_fw(Point pos) {
 	return result;
 }
 
-//0:X(null) 1:„¯(OOCC) 2:„¬(COOC) 3:„­(CCOO) 4:„®(OCCO) 5:„±(COOO) 6:„²(OCOO) 7:„³(OOCO) 8:„°(OOOC) 9:„´(OOOO) A:„«(OCOC) B:„ª(COCO) C:Gap_Column D:Gap_Row
+//0:X(null) 1:ï¿½ï¿½(OOCC) 2:ï¿½ï¿½(COOC) 3:ï¿½ï¿½(CCOO) 4:ï¿½ï¿½(OCCO) 5:ï¿½ï¿½(COOO) 6:ï¿½ï¿½(OCOO) 7:ï¿½ï¿½(OOCO) 8:ï¿½ï¿½(OOOC) 9:ï¿½ï¿½(OOOO) A:ï¿½ï¿½(OCOC) B:ï¿½ï¿½(COCO) C:Gap_Column D:Gap_Row
 std::vector<int> ArrowWatchdog::get_region_grid_patterns_fw(std::set<Point> points) {
 	std::vector<int> result(14, 0);
 	for (Point p : points) {
@@ -411,9 +411,9 @@ std::vector<int> ArrowWatchdog::get_region_grid_patterns_fw(std::set<Point> poin
 				DebugLog(p.first);
 				OutputDebugStringW(L",");
 				DebugLog(p.second);
-				OutputDebugStringW(L")‚Ìƒpƒ^[ƒ“‚Í");
+				OutputDebugStringW(L")ï¿½Ìƒpï¿½^ï¿½[ï¿½ï¿½ï¿½ï¿½");
 				DebugLog(count);
-				OutputDebugStringW(L"‚Å‚µ‚½B\n");
+				OutputDebugStringW(L"ï¿½Å‚ï¿½ï¿½ï¿½ï¿½B\n");
 				*/
 			}
 		}

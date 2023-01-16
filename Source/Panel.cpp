@@ -292,7 +292,7 @@ void Panel::WriteDecorations() {
 				arrows = true;
 			}
 
-			for (int symbol : {Decoration::Shape::NewSymbols, Decoration::Shape::NewSymbols2, Decoration::Shape::NewSymbols3, Decoration::Shape::NewSymbols4, Decoration::Shape::NewSymbols5, Decoration::Shape::NewSymbols6, Decoration::Shape::NewSymbols7, Decoration::Shape::NewSymbols8, Decoration::Shape::NewSymbols9, Decoration::Shape::NewSymbolsA, Decoration::Shape::NewSymbolsB, Decoration::Shape::NewSymbolsC, Decoration::Shape::NewSymbolsD, Decoration::Shape::NewSymbolsE, Decoration::Shape::NewSymbolsF}) {
+			for (int symbol : {Decoration::Shape::Mines, Decoration::Shape::Head, Decoration::Shape::Mushroom, Decoration::Shape::Ghost, Decoration::Shape::Pipe, Decoration::Shape::AntiTriangle, Decoration::Shape::Dart, Decoration::Shape::Raindrop, Decoration::Shape::Pointer, Decoration::Shape::NewSymbolsA, Decoration::Shape::NewSymbolsB, Decoration::Shape::NewSymbolsC, Decoration::Shape::NewSymbolsD, Decoration::Shape::NewSymbolsE, Decoration::Shape::NewSymbolsF}) {
 				if ((_grid[x][y] & 0xF000700) == symbol) {
 					_style |= HAS_TRIANGLES | HAS_STONES;
 					arrows = true;
@@ -646,74 +646,74 @@ void Panel::WriteIntersections() {
 		}
 	}
 
-	//NewSymbols (if applicable)
+	//Mines (if applicable)
 	for (int y = 1; y < _height; y += 2) {
 		for (int x = 1; x < _width; x += 2) {
-			if ((_grid[x][y] & 0xF000700) == Decoration::NewSymbols)
+			if ((_grid[x][y] & 0xF000700) == Decoration::Mines)
 				render_newsymbols(x, y, (_grid[x][y] & 0xf0000) >> 16 , intersections, intersectionFlags, polygons);
 		}
 	}
 
-	//NewSymbols2 (if applicable)
+	//Head (if applicable)
 	for (int y = 1; y < _height; y += 2) {
 		for (int x = 1; x < _width; x += 2) {
-			if ((_grid[x][y] & 0xF000700) == Decoration::NewSymbols2)
+			if ((_grid[x][y] & 0xF000700) == Decoration::Head)
 				render_newsymbols2(x, y, (_grid[x][y] & 0xf0000) >> 16, intersections, intersectionFlags, polygons);
 		}
 	}
 
-	//NewSymbols3 (if applicable)
+	//Mushroom (if applicable)
 	for (int y = 1; y < _height; y += 2) {
 		for (int x = 1; x < _width; x += 2) {
-			if ((_grid[x][y] & 0xF000700) == Decoration::NewSymbols3)
+			if ((_grid[x][y] & 0xF000700) == Decoration::Mushroom)
 				render_newsymbols3(x, y, (_grid[x][y] & 0xf0000) >> 16, intersections, intersectionFlags, polygons);
 		}
 	}
 
-	//NewSymbols4 (if applicable)
+	//Ghost (if applicable)
 	for (int y = 1; y < _height; y += 2) {
 		for (int x = 1; x < _width; x += 2) {
-			if ((_grid[x][y] & 0xF000700) == Decoration::NewSymbols4)
+			if ((_grid[x][y] & 0xF000700) == Decoration::Ghost)
 				render_newsymbols4(x, y, (_grid[x][y] & 0xff0000) >> 16, intersections, intersectionFlags, polygons);
 		}
 	}
 
-	//NewSymbols5 (if applicable)
+	//Pipe (if applicable)
 	for (int y = 1; y < _height; y += 2) {
 		for (int x = 1; x < _width; x += 2) {
-			if ((_grid[x][y] & 0xF000700) == Decoration::NewSymbols5)
+			if ((_grid[x][y] & 0xF000700) == Decoration::Pipe)
 				render_newsymbols5(x, y, (_grid[x][y] & 0xf0000) >> 16, intersections, intersectionFlags, polygons);
 		}
 	}
 
-	//NewSymbols6 (if applicable)
+	//AntiTriangle (if applicable)
 	for (int y = 1; y < _height; y += 2) {
 		for (int x = 1; x < _width; x += 2) {
-			if ((_grid[x][y] & 0xF000700) == Decoration::NewSymbols6)
+			if ((_grid[x][y] & 0xF000700) == Decoration::AntiTriangle)
 				render_newsymbols6(x, y, (_grid[x][y] & 0xf0000) >> 16, intersections, intersectionFlags, polygons);
 		}
 	}
 
-	//NewSymbols7 (if applicable)
+	//Dart (if applicable)
 	for (int y = 1; y < _height; y += 2) {
 		for (int x = 1; x < _width; x += 2) {
-			if ((_grid[x][y] & 0xF000700) == Decoration::NewSymbols7)
+			if ((_grid[x][y] & 0xF000700) == Decoration::Dart)
 				render_newsymbols7(x, y, (_grid[x][y] & 0xf0000) >> 16, (_grid[x][y] & 0x0f000) >> 12, intersections, intersectionFlags, polygons);
 		}
 	}
 
-	//NewSymbols8 (if applicable)
+	//Raindrop (if applicable)
 	for (int y = 1; y < _height; y += 2) {
 		for (int x = 1; x < _width; x += 2) {
-			if ((_grid[x][y] & 0xF000700) == Decoration::NewSymbols8)
+			if ((_grid[x][y] & 0xF000700) == Decoration::Raindrop)
 				render_newsymbols8(x, y, (_grid[x][y] & 0xf0000) >> 16, intersections, intersectionFlags, polygons);
 		}
 	}
 
-	//NewSymbols9 (if applicable)
+	//Pointer (if applicable)
 	for (int y = 1; y < _height; y += 2) {
 		for (int x = 1; x < _width; x += 2) {
-			if ((_grid[x][y] & 0xF000700) == Decoration::NewSymbols9)
+			if ((_grid[x][y] & 0xF000700) == Decoration::Pointer)
 				render_newsymbols9(x, y, (_grid[x][y] & 0xf0000) >> 16, intersections, intersectionFlags, polygons);
 		}
 	}

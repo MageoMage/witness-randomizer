@@ -46,11 +46,11 @@ public:
 		Dot_Row = 0x240020,
 		Dot_Column = 0x440020,
 		Dot_Intersection = 0x600020,
-		NewSymbols = 0x1000000,
-		NewSymbols2 = 0x2000000,
-		NewSymbols3 = 0x3000000,
-		NewSymbols4 = 0x4000000,
-		NewSymbols5 = 0x5000000,
+		Mines = 0x1000000,
+		Head = 0x2000000,
+		Mushroom = 0x3000000,
+		Ghost = 0x4000000,
+		Pipe = 0x5000000,
 		NewSymbols5_1 = 0x5010000,
 		NewSymbols5_2 = 0x5020000,
 		NewSymbols5_3 = 0x5030000,
@@ -62,10 +62,10 @@ public:
 		NewSymbols5_9 = 0x5090000,
 		NewSymbols5_A = 0x50A0000,
 		NewSymbols5_B = 0x50B0000,
-		NewSymbols6 = 0x6000000,
-		NewSymbols7 = 0x7000000,
-		NewSymbols8 = 0x8000000,
-		NewSymbols9 = 0x9000000,
+		AntiTriangle = 0x6000000,
+		Dart = 0x7000000,
+		Raindrop = 0x8000000,
+		Pointer = 0x9000000,
 		NewSymbolsA = 0xA000000,
 		NewSymbolsB = 0xB000000,
 		NewSymbolsC = 0xC000000,
@@ -757,22 +757,22 @@ private:
 		std::vector<float> positions_bottom = { 0.5f, 0.5f, 0.6f, 0.4f, 0.6f, 0.1f, 0.4f, 0.1f, 0.4f, 0.4f };
 		std::vector<float> positions_left =   { 0.5f, 0.5f, 0.4f, 0.4f, 0.1f, 0.4f, 0.1f, 0.6f, 0.4f, 0.6f };
 		std::vector<int> polys_basic = { 4, 5, 6, 0, 4, 6, 7, 0, 4, 7, 8, 0,};
-		//0:X(null) 1:„¯(OOCC) 2:„¬(COOC) 3:„­(CCOO) 4:„®(OCCO) 5:„±(COOO) 6:„²(OCOO) 7:„³(OOCO) 8:„°(OOOC) 9:„´(OOOO) A:„«(OCOC) B:„ª(COCO) C:Gap_Column D:Gap_Row
+		//0:X(null) 1:ï¿½ï¿½(OOCC) 2:ï¿½ï¿½(COOC) 3:ï¿½ï¿½(CCOO) 4:ï¿½ï¿½(OCCO) 5:ï¿½ï¿½(COOO) 6:ï¿½ï¿½(OCOO) 7:ï¿½ï¿½(OOCO) 8:ï¿½ï¿½(OOOC) 9:ï¿½ï¿½(OOOO) A:ï¿½ï¿½(OCOC) B:ï¿½ï¿½(COCO) C:Gap_Column D:Gap_Row
 		std::vector<int> NUMINDICATE = {
 			0b0000,//0
-			0b1100,//1„¯
-			0b0110,//2„¬
-			0b0011,//3„­
-			0b1001,//4„®
-			0b0111,//5„±
-			0b1011,//6„²
-			0b1101,//7„³
-			0b1110,//8„°
-			0b1111,//9„´
-			0b1010,//A„«
-			0b0101,//B„ª
-			0b1010,//C„«Gap
-			0b0101,//D„ªGap
+			0b1100,//1ï¿½ï¿½
+			0b0110,//2ï¿½ï¿½
+			0b0011,//3ï¿½ï¿½
+			0b1001,//4ï¿½ï¿½
+			0b0111,//5ï¿½ï¿½
+			0b1011,//6ï¿½ï¿½
+			0b1101,//7ï¿½ï¿½
+			0b1110,//8ï¿½ï¿½
+			0b1111,//9ï¿½ï¿½
+			0b1010,//Aï¿½ï¿½
+			0b0101,//Bï¿½ï¿½
+			0b1010,//Cï¿½ï¿½Gap
+			0b0101,//Dï¿½ï¿½Gap
 		};
 		std::vector<std::vector<float>> positions_list = { positions_top,
 			positions_right,
