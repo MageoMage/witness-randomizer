@@ -665,7 +665,7 @@ void PuzzleList::GenerateTownN()
 	//Church Star Door
 	generator->removeFlag(Generate::Config::EnableFlash);
 	specialCase->generateColorFilterPuzzle(0x28A0D, { 4, 4 }, { std::make_pair<int, int>(Decoration::Star | 1, 6),
-		std::make_pair<int,int>(Decoration::Star | 2, 6), std::make_pair<int,int>(Decoration::Star | 3, 4) }, { 1, 1, 0, 0 });
+		std::make_pair<int,int>(Decoration::Star | 2, 6), std::make_pair<int,int>(Decoration::Star | 3, 4) }, { 1, 1, 0, 0 }, colorblind);
 	specialCase->setPower(0x28A69, false); (new TownDoorWatchdog())->start();
 	//Soundproof Room
 	std::vector<int> allPitches = { DOT_SMALL, DOT_SMALL, DOT_MEDIUM, DOT_MEDIUM, DOT_LARGE, DOT_LARGE };
@@ -2125,7 +2125,7 @@ void PuzzleList::GenerateTownH()
 	//Church Star Door
 	generator->pathWidth = 0.6f;
 	specialCase->generateColorFilterPuzzle(0x28A0D, { 5, 5 }, { std::make_pair<int, int>(Decoration::Star | 1, 6), std::make_pair<int, int>(Decoration::Star | 2, 6),
-		std::make_pair<int,int>(Decoration::Star | 3, 6), std::make_pair<int,int>(Decoration::Star | 4, 6) }, { 1, 1, 0, 0 });
+		std::make_pair<int,int>(Decoration::Star | 3, 6), std::make_pair<int,int>(Decoration::Star | 4, 6) }, { 1, 1, 0, 0 }, false);
 	//Mess with targets
 	specialCase->copyTarget(0x03C08, 0x28A0D); specialCase->copyTarget(0x28A0D, 0x28998);
 	specialCase->setTargetAndDeactivate(0x28998, 0x28A0D); specialCase->setTargetAndDeactivate(0x03C0C, 0x03C08);

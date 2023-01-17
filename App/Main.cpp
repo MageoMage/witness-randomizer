@@ -167,7 +167,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 					randomizer->seedIsRNG = true;
 				}
 				else {
-					MessageBox(hwnd, L"Please enter a number between 1 and 9999999.", NULL, MB_OK);
+					MessageBox(hwnd, L"Please enter a number between 1 and 9999999 owo.", NULL, MB_OK);
 					break;
 				}
 			}

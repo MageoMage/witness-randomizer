@@ -46,7 +46,12 @@ void Randomizer::GenerateHard(HWND loadingHandle) {
 	Panel::StartArrowWatchdogs(_shuffleMapping);
 	SetWindowText(loadingHandle, L"Done!");
 	if (!Special::hasBeenRandomized())
-		MessageBox(GetActiveWindow(), L"Welcome to the abyss.", L"Go.", MB_OK);
+		MessageBox(GetActiveWindow(), L"Hi there! Thanks for trying out Expert Mode. It will be tough, but I hope you have fun!\r\n\r\n"
+		L"Expert has some unique tricks up its sleeve. You will encounter some situations that may seem impossible at first glance (even in tutorial)! "
+		L"In these situations, try to think of alternate approaches that weren't required in the base game.\r\n\r\n"
+		L"For especially tough puzzles, the Solver folder has a solver that works for most puzzles, though it occasionally fails to find a solution.\r\n\r\n"
+		L"The Github wiki also has a Hints page that can help with certain tricky puzzles.\r\n\r\n"
+		L"Thanks for playing, and good luck!", L"Welcome", MB_OK);
 }
 
 template <class T>
@@ -59,32 +64,34 @@ int find(const std::vector<T> &data, T search, size_t startIndex = 0) {
 }
 
 void Randomizer::AdjustSpeed() {
-	_memory->WritePanelData<float>(0x09F95, OPEN_RATE, { 0.5f });  // Desert Surface Final Control, 4x
-	_memory->WritePanelData<float>(0x03839, OPEN_RATE, { 7 }); // Mill Ramp, 3x
-	_memory->WritePanelData<float>(0x021BA, OPEN_RATE, { 5 }); // Mill Lift, 3x
-	_memory->WritePanelData<float>(0x17CC1, OPEN_RATE, { 5 }); // Mill Elevator, 4x
-	_memory->WritePanelData<float>(0x0061A, OPEN_RATE, { 1 }); // Swamp Sliding Bridge, 4x
-	_memory->WritePanelData<float>(0x09EEC, OPEN_RATE, { 30 }); // Mountain 2 Elevator, 4x
+	_memory->WritePanelData<float>(0x09F95, OPEN_RATE, { 0.04f });  // Desert Surface Final Control, 4x
+	_memory->WritePanelData<float>(0x03839, OPEN_RATE, { 0.7f }); // Mill Ramp, 3x
+	_memory->WritePanelData<float>(0x021BA, OPEN_RATE, { 1.5f }); // Mill Lift, 3x
+	_memory->WritePanelData<float>(0x17CC1, OPEN_RATE, { 0.8f }); // Mill Elevator, 4x
+	_memory->WritePanelData<float>(0x0061A, OPEN_RATE, { 0.1f }); // Swamp Sliding Bridge, 4x
+	_memory->WritePanelData<float>(0x09EEC, OPEN_RATE, { 0.1f }); // Mountain 2 Elevator, 4x
 	_memory->WritePanelData<float>(0x17E74, OPEN_RATE, { 0.03f }); // Swamp Flood gate (inner), 2x //Keeping these slower for now to help with EP's
 	_memory->WritePanelData<float>(0x1802C, OPEN_RATE, { 0.03f }); // Swamp Flood gate (outer), 2x
-	_memory->WritePanelData<float>(0x005A2, OPEN_RATE, { 0.1f }); // Swamp Rotating Bridge, 4x
-	_memory->WritePanelData<float>(0x17C6A, OPEN_RATE, { 1 }); // Ramp Angle, 5x
-	_memory->WritePanelData<float>(0x17F02, OPEN_RATE, { 1 }); // Ramp Position, 4x
+	_memory->WritePanelData<float>(0x005A2, OPEN_RATE, { 0.04f }); // Swamp Rotating Bridge, 4x
+	_memory->WritePanelData<float>(0x17C6A, OPEN_RATE, { 0.25f }); // Ramp Angle, 5x
+	_memory->WritePanelData<float>(0x17F02, OPEN_RATE, { 0.15f }); // Ramp Position, 4x
 	_memory->WritePanelData<float>(0x17C50, OPEN_RATE, { 0.3f }); //Boathouse Barrier, 2x
 }
 
 void Randomizer::RandomizeDesert() {
 	std::vector<int> puzzles = desertPanels;
 	std::vector<int> valid1 = { 0x00698, 0x0048F, 0x09F92, 0x09DA6, 0x0078D, 0x04D18, 0x0117A, 0x17ECA, 0x0A02D };
-	std::vector<int> valid2 = { 0x00698, 0x09F92, 0x0A036, 0x0A049, 0x0A053, 0x00422, 0x006E3, 0x00C72, 0x008BB, 0x0078D, 0x01205, 0x181AB, 0x012D7, 0x17ECA, 0x0A02D };
+	std::vector<int> valid2 = { 0x00698, 0x0048F, 0x09F92, 0x0A036, 0x0A049, 0x0A053, 0x00422, 0x006E3, 0x00C72, 0x008BB, 0x0078D, 0x04D18, 0x01205, 0x181AB, 0x012D7, 0x17ECA, 0x0A02D };
 	std::vector<int> valid3 = { 0x00698, 0x0048F, 0x09F92, 0x0A036, 0x0A049, 0x00422, 0x008BB, 0x0078D, 0x18313, 0x01205 };
 	std::vector<int> validSurfaceSeven = { 0x00698, 0x0048F, 0x09F92, 0x0A036, 0x0A049, 0x0A053, 0x00422, 0x006E3, 0x0A02D, 0x00C72, 0x0129D, 0x008BB, 0x0078D, 0x18313, 0x04D18, 0x01205, 0x181AB, 0x17ECA, 0x012D7 };
+	std::vector<int> validSurfaceThree = { 0x00698, 0x0048F, 0x09F92, 0x0A049, 0x006E3, 0x008BB, 0x0078D, 0x01205, 0x012D7, 0x17ECA, 0x0A02D };
 	int endIndex = static_cast<int>(desertPanels.size());
 	for (int i = 0; i < endIndex - 1; i++) {
 		const int target = Random::rand() % (endIndex - i) + i;
 		//Prevent ambiguity caused by shadows, and ensure all latches on Surface 7 and Light 3 must be opened
 		if (i == target || i == 1 && std::find(valid1.begin(), valid1.end(), desertPanels[target]) == valid1.end() || 
-			(i == 2 || i == 9) && std::find(valid2.begin(), valid2.end(), desertPanels[target]) == valid2.end() ||
+			i == 2 && std::find(validSurfaceThree.begin(), validSurfaceThree.end(), desertPanels[target]) == validSurfaceThree.end() ||
+			i == 9 && std::find(valid2.begin(), valid2.end(), desertPanels[target]) == valid2.end() ||
 			i == 6 && std::find(validSurfaceSeven.begin(), validSurfaceSeven.end(), desertPanels[target]) == validSurfaceSeven.end() ||
 			i == 10 && std::find(valid3.begin(), valid3.end(), desertPanels[target]) == valid3.end()) {
 			i--;

@@ -280,7 +280,7 @@ bool ArrowWatchdog::checkGhost(int x, int y, int symbol) {
 		Point pos = pick_random_fw(open);
 		bool flag = false;
 		for (Point p : get_region_for_watchdog(pos)) {
-			if(flag && get(p) & 0xffffff0 == Decoration::Ghost)
+			if(flag && (get(p) & 0xffffff0) == Decoration::Ghost)
 			{
 				OutputDebugStringW(L"(");
 				DebugLog(p.first);
@@ -290,7 +290,7 @@ bool ArrowWatchdog::checkGhost(int x, int y, int symbol) {
 				OutputDebugStringW(L"too_many_ghost");
 				return false;
 			}
-			else if (get(p) & 0xffffff0 == Decoration::Ghost) {
+			else if ((get(p) & 0xffffff0) == Decoration::Ghost) {
 
 				OutputDebugStringW(L"(");
 				DebugLog(p.first);
